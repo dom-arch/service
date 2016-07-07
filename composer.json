@@ -1,0 +1,30 @@
+{
+  "name": "dom-arch/service",
+  "description": "The DOMArch service context",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/dom-arch/dom-arch"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/dom-arch/indoctrinated"
+    }
+  ],
+  "autoload": {
+    "classmap": ["classes/Entities"],
+    "files": ["../../libraries/lcfvs/dom-arch/lib/dump.php"],
+    "psr-4": {
+      "Assemblies\\": "classes/Assemblies",
+      "Lib\\": "classes/Lib",
+      "Modules\\": "classes/Modules",
+      "Repositories\\": "classes/Repositories"
+    }
+  },
+  "require": {
+    "php": ">=7.0.1",
+    "dom-arch/dom-arch": "dev-master",
+    "dom-arch/indoctrinated": "dev-master"
+  }
+}
