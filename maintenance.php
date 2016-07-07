@@ -8,7 +8,6 @@ $json = json_encode((object) [
 
 http_response_code(503);
 header('Content-Type: application/json');
-header('Content-Type: application/json');
 header('Content-Length: ' . strlen($json));
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Thu, 01 Jan 1970 00:00:00');
