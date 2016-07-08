@@ -24,7 +24,7 @@
   },
   "require": {
     "php": ">=7.0.1",
-    "dom-arch/dom-arch": "dev-master",
-    "dom-arch/indoctrinated": "dev-master"
+    "dom-arch/dom-arch": ">=0.7.0",
+    "dom-arch/indoctrinated": ">=0.9.8"
   }
 }
