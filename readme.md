@@ -9,6 +9,8 @@ The DOMArch service context, no pages, private JSON API, encrypted urls & reques
 
 ## <a name="installation">Installation :</a>
 
+<strong>Please follow the [DOMArch requirements](https://github.com/dom-arch/dom-arch#requirements)</strong>
+
 <strong>If you change the following example names, please adapt your `config.json`</strong>
 
 * Ensure PDO is enabled
