@@ -15,7 +15,7 @@ The DOMArch service context, no pages, private JSON API, encrypted urls & reques
 * Ensure PDO is enabled
 * Clone this repository into your `entrypoints` directory
    `git clone https://github.com/dom-arch/service.git service`
-* Add a host, like `domain.tld`, to your `hosts` file
+* Add a host, like `service.domain.tld`, to your `hosts` file
 * Create a database like `domain-tld-service`
 * Go to the `sql` directory and execute each table script
 * In a shell, go to your `service` directory and exectute the following commands :
