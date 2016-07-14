@@ -277,15 +277,11 @@ class Users extends \Lib\ORM\Entity
     /**
      * Get password
      *
-     * @param $password = null
-     *
      * @return null
      */
-    public function getPassword(
-        $password = null
-    )
+    public function getPassword()
     {
-        return $password;
+        return null;
     }
 
     /**
