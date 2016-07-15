@@ -8,7 +8,6 @@ https://github.com/Lcfvs/DOMArch
 */
 namespace Modules\Error;
 
-use StdClass;
 use Lib\Controller;
 
 class BadRequest
