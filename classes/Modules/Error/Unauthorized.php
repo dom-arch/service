@@ -8,6 +8,8 @@ https://github.com/Lcfvs/DOMArch
 */
 namespace Modules\Error;
 
+use StdClass;
+
 use Lib\Controller;
 
 class Unauthorized
@@ -15,6 +17,9 @@ class Unauthorized
 {
     public function get()
     {
-        $this->_view->init('message', 'Unauthorized');
+        $error = new StdClass();
+        $error->message = 'Unauthorized';
+
+        $this->_view->init('messages', [$error]);
     }
 }
