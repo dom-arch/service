@@ -14,11 +14,10 @@ use Lib\Controller;
 class BadRequest
     extends Controller
 {
-    public function get()
+    public function get(
+        array $errors
+    )
     {
-        $error = new StdClass();
-        $error->message = 'Bad request';
-
-        $this->_view->init('messages', [$error]);
+        $this->_view->init('messages', $errors);
     }
 }
