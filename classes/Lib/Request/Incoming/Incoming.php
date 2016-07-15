@@ -75,14 +75,16 @@ class Incoming
         return $this;
     }
 
-    public function badRequest()
+    public function badRequest(
+        array $errors
+    )
     {
         http_response_code(static::STATUS_BAD_REQUEST);
 
         return $this->forward($this->getUrl()->rewrite([
             'moduleName' => 'Error',
             'className' => 'BadRequest'
-        ]))->respond();
+        ]))->respond($errors);
     }
 
     public function notFound()
@@ -126,7 +128,9 @@ class Incoming
         ]))->respond();
     }
 
-    public function dump($value = null)
+    public function dump(
+        $value = null
+    )
     {
         http_response_code(static::STATUS_OK);
 
