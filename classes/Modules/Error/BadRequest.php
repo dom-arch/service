@@ -8,6 +8,7 @@ https://github.com/Lcfvs/DOMArch
 */
 namespace Modules\Error;
 
+use StdClass;
 use Lib\Controller;
 
 class BadRequest
@@ -15,6 +16,9 @@ class BadRequest
 {
     public function get()
     {
-        $this->_view->init('message', 'Bad request');
+        $error = new StdClass();
+        $error->message = 'Bad request';
+
+        $this->_view->init('messages', [$error]);
     }
 }
