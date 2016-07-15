@@ -8,6 +8,9 @@ https://github.com/Lcfvs/DOMArch
 */
 namespace Modules\Error;
 
+use StdClass;
+
+use Lib\Config;
 use Lib\Controller;
 
 class InternalError
@@ -23,9 +26,18 @@ class InternalError
     {
         $view = $this->_view;
 
+        $error = new StdClass();
+        $error->message = 'Internal error';
+
+        $this->_view->init('messages', [$error]);
+
         if (!Config::global()->get('context')->get('isDevMode')) {
-            // todo add to logs
-            exit('define logger!');
+            error_log("Error
+@$file:$line
+$message
+---
+");
+            return;
         }
 
         $view
