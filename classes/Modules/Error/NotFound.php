@@ -8,6 +8,8 @@ https://github.com/Lcfvs/DOMArch
 */
 namespace Modules\Error;
 
+use StdClass;
+
 use Lib\Controller;
 
 class NotFound
@@ -15,6 +17,9 @@ class NotFound
 {
     public function get()
     {
-        $this->_view->init('message', 'Not found');
+        $error = new StdClass();
+        $error->message = 'Not found';
+
+        $this->_view->init('messages', [$error]);
     }
 }
