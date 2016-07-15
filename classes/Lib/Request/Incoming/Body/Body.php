@@ -1,6 +1,7 @@
 <?php
 namespace Lib\Request\Incoming;
 
+use DOMArch\Crypto;
 use DOMArch\Request;
 use DOMArch\Set;
 use Lib\Config;
