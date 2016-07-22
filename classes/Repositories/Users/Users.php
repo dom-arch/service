@@ -18,12 +18,9 @@ class Users extends Repository
         string $password
     )
     {
-        $user = $this->createQueryBuilder('record')
-            ->andWhere('record.account = :account')
-            ->andWhere('record.archivedAt IS NULL')
-            ->setParameter('account', $account)
-                ->getQuery()
-                    ->getOneOrNullResult();
+        $user = $this->selectBy([
+            'account' => $account
+        ]);
         
         if (!$user) {
             return;

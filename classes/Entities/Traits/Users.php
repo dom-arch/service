@@ -16,4 +16,11 @@ trait Users
         'token',
         'locale'
     ];
+
+    public function isPassword(
+        string $password
+    )
+    {
+        return password_verify($password, $this->getPassword());
+    }
 }
