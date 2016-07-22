@@ -2,7 +2,9 @@
 
 
 
+
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Users
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Users extends \Lib\ORM\Entity
 {
+    use Traits\Users;
+
     /**
      * @var string
      *
@@ -68,7 +72,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->account = $account;
-    
+
         return $this;
     }
 
@@ -86,11 +90,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->account !== null) {
             return $this;
         }
-    
+
         if (is_callable($account)) {
             return $this->setAccount($account());
         }
-    
+
         return $this->setAccount($account);
     }
 
@@ -108,11 +112,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->account !== null) {
             return $this->account;
         }
-    
+
         if (is_callable($account)) {
             return $account();
         }
-    
+
         return $account;
     }
 
@@ -128,7 +132,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
@@ -146,11 +150,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->type !== null) {
             return $this;
         }
-    
+
         if (is_callable($type)) {
             return $this->setType($type());
         }
-    
+
         return $this->setType($type);
     }
 
@@ -168,11 +172,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->type !== null) {
             return $this->type;
         }
-    
+
         if (is_callable($type)) {
             return $type();
         }
-    
+
         return $type;
     }
 
@@ -188,7 +192,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
@@ -206,11 +210,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->email !== null) {
             return $this;
         }
-    
+
         if (is_callable($email)) {
             return $this->setEmail($email());
         }
-    
+
         return $this->setEmail($email);
     }
 
@@ -228,11 +232,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->email !== null) {
             return $this->email;
         }
-    
+
         if (is_callable($email)) {
             return $email();
         }
-    
+
         return $email;
     }
 
@@ -248,7 +252,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->password = $password;
-    
+
         return $this;
     }
 
@@ -266,22 +270,34 @@ class Users extends \Lib\ORM\Entity
         if ($this->password !== null) {
             return $this;
         }
-    
+
         if (is_callable($password)) {
             return $this->setPassword($password());
         }
-    
+
         return $this->setPassword($password);
     }
 
     /**
      * Get password
      *
-     * @return null
+     * @param $password = null
+     *
+     * @return string
      */
-    public function getPassword()
+    public function getPassword(
+        $password = null
+    )
     {
-        return null;
+        if ($this->password !== null) {
+            return $this->password;
+        }
+
+        if (is_callable($password)) {
+            return $password();
+        }
+
+        return $password;
     }
 
     /**
@@ -296,7 +312,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->token = $token;
-    
+
         return $this;
     }
 
@@ -314,11 +330,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->token !== null) {
             return $this;
         }
-    
+
         if (is_callable($token)) {
             return $this->setToken($token());
         }
-    
+
         return $this->setToken($token);
     }
 
@@ -327,12 +343,20 @@ class Users extends \Lib\ORM\Entity
      *
      * @param $token = null
      *
-     * @return null
+     * @return string
      */
     public function getToken(
         $token = null
     )
     {
+        if ($this->token !== null) {
+            return $this->token;
+        }
+
+        if (is_callable($token)) {
+            return $token();
+        }
+
         return $token;
     }
 
@@ -348,7 +372,7 @@ class Users extends \Lib\ORM\Entity
     )
     {
         $this->locale = $locale;
-    
+
         return $this;
     }
 
@@ -366,11 +390,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->locale !== null) {
             return $this;
         }
-    
+
         if (is_callable($locale)) {
             return $this->setLocale($locale());
         }
-    
+
         return $this->setLocale($locale);
     }
 
@@ -388,18 +412,11 @@ class Users extends \Lib\ORM\Entity
         if ($this->locale !== null) {
             return $this->locale;
         }
-    
+
         if (is_callable($locale)) {
             return $locale();
         }
-    
-        return $locale;
-    }
 
-    public function isPassword(
-        string $password
-    )
-    {
-        return password_verify($password, $this->password);
+        return $locale;
     }
 }
