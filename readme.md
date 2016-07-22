@@ -14,7 +14,7 @@ The DOMArch service context, no pages, private JSON API, encrypted urls & reques
 <strong>If you change the following example names, please adapt your `config.json`</strong>
 
 * Ensure PDO is enabled
-* Clone this repository into your `entrypoints` directory
+* Clone this repository into your `entry-points` directory
    `git clone https://github.com/dom-arch/service.git service`
 * Add a host, like `service.domain.tld`, to your `hosts` file
 * Create a database like `domain-tld-service`
