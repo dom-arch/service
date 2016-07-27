@@ -2,7 +2,6 @@
 namespace Lib;
 
 use Doctrine\ORM\QueryBuilder;
-use DOMArch\Set;
 
 class Url extends \DOMArch\Url
 {
@@ -10,7 +9,7 @@ class Url extends \DOMArch\Url
 
     public function __construct(array $fields)
     {
-        $this->_metas = Set::empty();
+        $this->_metas = Metas::empty();
 
         parent::__construct($fields);
     }
