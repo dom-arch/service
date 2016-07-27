@@ -15,7 +15,7 @@ class Url extends \DOMArch\Url
     }
 
     /**
-     * @return Set
+     * @return Metas
      */
     public function getMetas()
     {
