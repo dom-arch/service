@@ -2,6 +2,8 @@
 namespace Lib;
 
 use Doctrine\ORM\QueryBuilder;
+use DOMArch\Url\Params;
+use Lib\Url\Metas;
 
 class Url extends \DOMArch\Url
 {
@@ -14,8 +16,21 @@ class Url extends \DOMArch\Url
         parent::__construct($fields);
     }
 
+    public function reset(
+        array $params = []
+    )
+    {
+        $this->_path = '/';
+        $this->_query = '';
+        $this->_fragment = '';
+        $this->_params = Params::fromArray($params);
+        $this->_metas = Metas::fromArray($params);
+
+        return $this;
+    }
+
     /**
-     * @return Metas
+     * @return Set
      */
     public function getMetas()
     {
@@ -91,7 +106,7 @@ class Url extends \DOMArch\Url
     )
     {
         $alias = $builder->getRootAliases()[0] . '.';
-        
+
         foreach ($this->getParams()->toArray() as $name => $value) {
             if ($name[0] !== '$') {
                 $name = $alias . $name;
@@ -115,7 +130,7 @@ class Url extends \DOMArch\Url
             if ($name === '$order') {
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
-                    
+
                     $builder->orderBy(...$values);
                 }
 
@@ -126,7 +141,7 @@ class Url extends \DOMArch\Url
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
 
-                    $builder->expr()->gt(...$values);
+                    $builder->andWhere($builder->expr()->gt(...$values));
                 }
 
                 continue;
@@ -136,7 +151,7 @@ class Url extends \DOMArch\Url
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
 
-                    $builder->expr()->gte(...$values);
+                    $builder->andWhere($builder->expr()->gte(...$values));
                 }
 
                 continue;
@@ -146,7 +161,7 @@ class Url extends \DOMArch\Url
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
 
-                    $builder->expr()->lt(...$values);
+                    $builder->andWhere($builder->expr()->lt(...$values));
                 }
 
                 continue;
@@ -156,7 +171,7 @@ class Url extends \DOMArch\Url
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
 
-                    $builder->expr()->lte(...$values);
+                    $builder->andWhere($builder->expr()->lte(...$values));
                 }
 
                 continue;
@@ -166,7 +181,7 @@ class Url extends \DOMArch\Url
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
 
-                    $builder->expr()->isNull(...$values);
+                    $builder->andWhere($builder->expr()->isNull(...$values));
                 }
 
                 continue;
@@ -175,8 +190,8 @@ class Url extends \DOMArch\Url
             if ($name === '$like') {
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
-
-                    $builder->expr()->like(...$values);
+                    $search = $builder->expr()->literal($values[1]);
+                    $builder->andWhere($builder->expr()->like($values[0], $search));
                 }
 
                 continue;
@@ -185,8 +200,15 @@ class Url extends \DOMArch\Url
             if ($name === '$in') {
                 foreach ($value as $values) {
                     $values[0] = $alias . $values[0];
+                    $in_values = $values[1];
 
-                    $builder->expr()->in(...$values);
+                    foreach ($in_values as $in_key => $value) {
+                        if (gettype($value) === 'string') {
+                            $in_values[$in_key] = $builder->expr()->literal($values);
+                        }
+                    }
+
+                    $builder->andWhere($builder->expr()->in($values[0], $in_values));
                 }
 
                 continue;
