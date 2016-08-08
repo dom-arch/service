@@ -12,8 +12,6 @@ trait Users
         'account',
         'type',
         'email',
-        'password',
-        'token',
         'locale'
     ];
 
